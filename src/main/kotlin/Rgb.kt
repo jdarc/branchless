@@ -22,8 +22,5 @@ object Rgb {
     }
 
     // How do you fancy maintaining code like this?
-    fun clampBranchless(x: Int): Int {
-        val low = 0xFF - x.ushr(31) * 0xFF
-        return x.and(low) or (0 - x.and(0xFFFF00)).ushr(31) * low
-    }
+    fun clampBranchless(x: Int) = x and x.shr(31).inv().and(255) or (-x.and(0xFFFFFF.shl(8))).shr(31).and(255)
 }

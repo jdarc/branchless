@@ -24,7 +24,6 @@ internal class RgbTest {
         }
     }
 
-
     @Nested
     @DisplayName("clampBranchless")
     inner class Branchless {
