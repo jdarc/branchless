@@ -12,15 +12,8 @@ object Rgb {
 
     fun add(x: Int, y: Int) = pack(red(x) + red(y), grn(x) + grn(y), blu(x) + blu(y))
 
-    fun clamp(x: Int) = if (branchless) clampBranchless(x) else clampBranching(x)
-
-    // We could have simply used x.coerceIn(0, 255), either way let the compiler do the magic.
-    fun clampBranching(x: Int) = when {
-        x < 0 -> 0
-        x > 255 -> 255
-        else -> x
+    fun clamp(x: Int) = when {
+        branchless -> x and x.shr(31).inv() or (255 - x).shr(31) and 255
+        else -> x.coerceIn(0, 255)
     }
-
-    // How do you fancy maintaining code like this?
-    fun clampBranchless(x: Int) = x and x.shr(31).inv().and(255) or (-x.and(0xFFFFFF.shl(8))).shr(31).and(255)
 }
