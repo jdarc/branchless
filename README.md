@@ -17,17 +17,13 @@ software development channel, I am certain it could be optimised even further!
 ## Instructions
 
 Run tests:
-```
-./gradlew test
-```
+> ./gradlew test
 
 Run console application:
-```
-./gradlew run
-```
+> ./gradlew run
 
 ## Benchmark
-All results are in milliseconds.
+Using OpenJDK 16.0.1, all results are in milliseconds.
 
 ### Hardware
 - MacBook Pro (15-inch, 2018)
@@ -36,23 +32,23 @@ All results are in milliseconds.
 
 ### Configuration
 - Iterations: 100000000
-- Loops: 10  
+- Loops: 10
 - Warmups: 2
 
 ### Results
 | Pass | Branching                     | Branchless                    |
 |------|-------------------------------|-------------------------------|
-| 1    | 293                           | 390                           |
-| 2    | 297                           | 390                           |
-| 3    | 288                           | 392                           |
-| 4    | 284                           | 388                           |
-| 5    | 287                           | 389                           |
-| 6    | 287                           | 391                           |
-| 7    | 286                           | 397                           |
-| 8    | 285                           | 400                           |
-| 9    | 286                           | 399                           |
-| 10   | 288                           | 393                           |
-|      | Average: 288 <br/>Median: 287 | Average: 392 <br/>Median: 392 |
+| 1    | 304                           | 379                           |
+| 2    | 332                           | 376                           |
+| 3    | 319                           | 380                           |
+| 4    | 323                           | 375                           |
+| 5    | 320                           | 373                           |
+| 6    | 321                           | 374                           |
+| 7    | 320                           | 376                           |
+| 8    | 321                           | 374                           |
+| 9    | 320                           | 375                           |
+| 10   | 326                           | 374                           |
+|      | Average: 320 <br/>Median: 321 | Average: 375 <br/>Median: 375 |
 
 ## License
 Copyright © 2021 Jean d'Arc

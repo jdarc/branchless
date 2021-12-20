@@ -1,6 +1,6 @@
 object Rgb {
 
-    var mode: Clamp = Clamp.Standard()
+    var mode = Clamp.Standard
 
     fun red(rgb: Int) = rgb shr 0x10 and 0xFF
 

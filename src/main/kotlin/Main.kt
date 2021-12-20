@@ -8,10 +8,11 @@ fun main() {
     log(rgb1, rgb2, Rgb.add(rgb1, rgb2))
 
     println()
+    Rgb.mode = Clamp.Standard
     bench(rgb1, rgb2)
 
     println()
-    Rgb.mode = Clamp.Branchless()
+    Rgb.mode = Clamp.Branchless
     bench(rgb1, rgb2)
 }
 
@@ -22,7 +23,7 @@ private fun bench(rgb1: Int, rgb2: Int) {
 
     var a = 1
     var result = 0x000000
-    benchmark(iterations = 200000000, warmup = 5, loops = 20) {
+    benchmark(iterations = 100000000) {
         result = Rgb.add(rgb1 + a, rgb2 - a)
         a = 1 - a // possibly prevents inlining and other smart compiler stuff?
     }
