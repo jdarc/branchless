@@ -1,36 +1,24 @@
-// based on https://gist.github.com/olegcherr/b62a09aba1bff643a049
-inline fun benchmark(iterations: Int = 100000, loops: Int = 10, warmup: Int = 2, callback: () -> Unit) {
+inline fun benchmark(iterations: Int, loops: Int, warmup: Int, setup: (Int) -> Unit = { }, callback: () -> Unit) {
+    println("Benchmark: iterations = $iterations loops = $loops warmup = $warmup")
 
-    val results = mutableListOf<Long>()
-    var totalTime = 0L
-    var t = 0
+    val pad = { x: Int -> x.toString().padStart(2, '0') }
 
-    println("Benchmark: iterations=${iterations} loops=${loops} warmup=${warmup}")
+    var total = 0L
+    for (loop in 0 until loops + warmup) {
+        setup(loop)
 
-    while (++t <= loops + warmup) {
-        val startTime = System.currentTimeMillis()
+        val start = System.currentTimeMillis()
+        for (iter in 0 until iterations) callback()
+        val duration = System.currentTimeMillis() - start
 
-        var i = 0
-        while (i++ < iterations) {
-            callback()
-        }
-
-        if (t <= warmup) {
-            println("Warming: $t of $warmup")
+        if (loop < warmup) {
+            println("Warm ${pad(loop + 1)} of ${pad(warmup)}: ${duration}ms")
             continue
         }
 
-        val time = System.currentTimeMillis() - startTime
-        println("Loop ${t - warmup} of ${loops}: ${time}ms")
-
-        results.add(time)
-        totalTime += time
+        total += duration
+        println("Loop ${pad(loop + 1 - warmup)} of ${pad(loops)}: ${duration}ms")
     }
 
-    results.sort()
-
-    val average = totalTime / loops
-    val median = results[results.size / 2]
-
-    println("Results: average=${average}ms median=${median}ms")
+    println("Average: ${(total.toDouble() / loops.toDouble()).toInt()}ms")
 }
