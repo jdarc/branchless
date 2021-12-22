@@ -1,1 +1,1 @@
-rootProject.name = "Branchless"
+rootProject.name = "branchless"

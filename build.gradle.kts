@@ -18,7 +18,8 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.languageVersion = "1.6"
+    kotlinOptions.jvmTarget = "17"
 }
 
 application {

@@ -20,7 +20,7 @@ private fun runBenchmarks(rgb1: Int, rgb2: Int, addExpect: Int, subExpect: Int) 
     run(rgb1, rgb2, addExpect, subExpect, Clamp::branchless, "Branchless")
 }
 
-private inline fun run(rgb1: Int, rgb2: Int, addExpect: Int, subExpect: Int, crossinline op: (Int) -> Int, title: String) {
+private inline fun run(rgb1: Int, rgb2: Int, addExpect: Int, subExpect: Int, op: (Int) -> Int, title: String) {
     println("-".repeat(32))
     println("$title Clamp")
     println("-".repeat(32))
